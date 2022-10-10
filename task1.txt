@@ -1,0 +1,27 @@
+var numComponents = function(head, G) {
+    const set = new Set(G);
+    
+    let curr = head;
+    let count = 0;
+    
+    while (curr != null) {
+        let connected = curr;
+        
+        if (set.has(connected.val)) {
+            count++;
+        
+            while (connected != null && set.has(connected.val)) {
+                set.delete(connected.val);
+                connected = connected.next;
+            }
+            
+            if (!connected) return count;
+            curr = connected;
+        }
+        else {
+            curr = curr.next;
+        } 
+    }
+    
+    return count;
+}; 
